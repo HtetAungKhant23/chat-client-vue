@@ -12,10 +12,16 @@ onBeforeMount(() => {
         messages.value = response;
     });
 
-    socket.on('message', { text: messageText.value }, () => {
-        messageText.value = '';
-    });
+    socket.on('message', (message) => {
+        messages.value.push(message);
+    })
 })
+
+const sendMessage = () => {
+    socket.emit('createMessage', { text: messageText.value }, () => {
+        messageText.value = '';
+    })
+}
 
 
 
