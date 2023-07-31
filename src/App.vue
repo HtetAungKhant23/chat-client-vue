@@ -8,6 +8,7 @@ const messages = ref([]);
 const messageText = ref('');
 const joined = ref(false);
 const name = ref('');
+const typingDisplay = ref('');
 
 onBeforeMount(() => {
     socket.emit('findAllMessages', {}, (response) => {
@@ -31,7 +32,13 @@ const join = () => {
     })
 }
 
-
+let timeout;
+const emitTyping = () => {
+    socket.emit('typing', { isTyping: true });
+    timeout = setTimeout(() => {
+        socket.emit('typing', { isTyping: false });
+    },2000)
+}
 
 </script>
 
