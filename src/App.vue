@@ -4,6 +4,18 @@ import { onBeforeMount, ref } from 'vue';
 
 const socket = io('http://localhost:3000');
 
+const messages = ref([]);
+const messageText = ref('');
+
+onBeforeMount(() => {
+    socket.emit('findAllMessages', {}, (response) => {
+        messages.value = response;
+    });
+
+    socket.on('message', { text: messageText.value }, () => {
+        messageText.value = '';
+    });
+})
 
 
 
