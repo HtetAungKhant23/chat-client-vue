@@ -6,6 +6,8 @@ const socket = io('http://localhost:3000');
 
 const messages = ref([]);
 const messageText = ref('');
+const joined = ref(false);
+const name = ref('');
 
 onBeforeMount(() => {
     socket.emit('findAllMessages', {}, (response) => {
@@ -20,6 +22,12 @@ onBeforeMount(() => {
 const sendMessage = () => {
     socket.emit('createMessage', { text: messageText.value }, () => {
         messageText.value = '';
+    })
+}
+
+const join = () => {
+    socket.emit('join', { name: name.value }, () => {
+        joined.value = true;
     })
 }
 
