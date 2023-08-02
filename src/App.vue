@@ -35,8 +35,9 @@ const sendMessage = () => {
 }
 
 const join = () => {
-    socket.emit('join', { name: name.value }, () => {
+    socket.emit('join', { name: name.value }, (response) => {
         joined.value = true;
+        messages.value = response;
     })
 }
 
@@ -53,7 +54,7 @@ const emitTyping = () => {
 <template>
     <div class="chat">
         <div v-if="!joined">
-            <form @submit.prevent="join">
+            <form @submit.prevent="join" >
                 <label>What's your name?</label>
                 <input v-model="name" />
                 <button type="submit">Send</button>
