@@ -84,4 +84,19 @@ const emitTyping = () => {
 <style>
 @import './assets/base.css';
 
+.chat{
+    padding: 20px;
+    height: 100vh;
+}
+
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.messages-container{
+    flex: 1;
+}
+
 </style>
